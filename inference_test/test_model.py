@@ -6,11 +6,11 @@ from pathlib import Path
 from openvino import Core
 
 
-model_path = Path("computer_vision_model/model/ov model/")
+model_path = Path("computer_vision_model/model/ov_model/")
 model = Path(f"{model_path}/model.xml")
 weights = Path(f"{model_path}/model.bin")
 
-quantized_model_path = Path("computer_vision_model/model/quantized model/")
+quantized_model_path = Path("computer_vision_model/model/quantized_model/")
 quantized_model = Path(f"{model_path}/model.xml")
 quantized_weights = Path(f"{model_path}/model.bin")
 print("Model located at {}".format(model_path))

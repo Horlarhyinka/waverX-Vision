@@ -8,4 +8,4 @@ loaded_model =  tf.keras.models.load_model('model/disaster_detector.h5')
 
 ov_model = convert_model(loaded_model)
 # save model to OpenVINO IR for later use
-openvino.save_model(ov_model, 'model/ov model/model.xml')
+openvino.save_model(ov_model, 'model/ov_model/model.xml')

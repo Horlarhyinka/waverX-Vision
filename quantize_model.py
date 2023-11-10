@@ -3,11 +3,8 @@ import openvino
 from sklearn.metrics import accuracy_score
 import nncf
 import tensorflow as tf
-import os
 import tensorflow_datasets as tfds
 from openvino.runtime import Core
-from imutils import paths
-from model_config import config
 
 # Initialize the Inference Engine Core
 ie = Core()
@@ -75,5 +72,4 @@ quantized_model = nncf.quantize_with_accuracy_control(model,
                         max_drop=0.01)
 print(quantized_model)
 print("[INFO] Saving quantized model")
-openvino.serialize(quantized_model, "model/quantized model/quantized_model.xml")
-
+openvino.serialize(quantized_model, "model/quantized_model/quantized_model.xml")
