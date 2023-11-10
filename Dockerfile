@@ -7,14 +7,8 @@ WORKDIR /opt/ml/model
 # Copy your model files to the container
 COPY models/ /opt/ml/models/
 
-# Set environment variables (replace these with your actual values)
-ENV MODEL_NAME=waverX-Vision
-ENV MODEL_PATH=/opt/ml/models
-ENV CONFIG_PATH=/opt/ml/models/config.json
-ENV OVMS_PORT=9001
-
 # Expose the port that OpenVINO Model Server will run on
-EXPOSE $OVMS_PORT
+EXPOSE 9001
 
 # Start the OpenVINO Model Server
-CMD ["ovms", "--port", "9001", "--config_path", "$CONFIG_PATH"]
+CMD ["ovms", "--port", "9001", "--config_path", "/opt/ml/models/config.json"]
