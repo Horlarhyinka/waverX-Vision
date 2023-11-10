@@ -17,4 +17,4 @@ ENV OVMS_PORT=9001
 EXPOSE $OVMS_PORT
 
 # Start the OpenVINO Model Server
-CMD ["ovms", "--model_path", "$MODEL_PATH", "--model_name", "$MODEL_NAME", "--port", "9001", "--config_path", "$CONFIG_PATH"]
+CMD ["ovms", "--port", "9001", "--config_path", "$CONFIG_PATH"]
