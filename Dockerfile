@@ -2,7 +2,7 @@
 FROM openvino/model_server:latest
 
 # Set the working directory
-WORKDIR /opt/ml/model
+WORKDIR /opt/ml/models
 
 # Copy your model files to the container
 COPY models/ /opt/ml/models/
