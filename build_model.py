@@ -23,7 +23,6 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 import matplotlib
 matplotlib.use("Agg")
 
-print(config.WARMUP_PLOT_PATH)
 LAYERS_TO_FREEZE = 172
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -71,7 +70,7 @@ def unfreeze_layer(baseModel, model):
     # for the changes to the model to take affect we need to recompile
     # the model, this time using SGD with a *very* small learning rate
     print("[INFO] re-compiling model...")
-    opt = ADAM(learning_rate=config.INIT_LR, decay=config.INIT_LR / config.UNFROZEN_NUM_EPOCHS)
+    opt = Adam(learning_rate=config.INIT_LR, decay=config.INIT_LR / config.UNFROZEN_NUM_EPOCHS)
     model.compile(loss="categorical_crossentropy", optimizer=opt,
                   metrics=["accuracy"])
     return model
@@ -185,15 +184,15 @@ val_gen.reset()
 model = unfreeze_layer(base_model, model)
 # train the model again, this time fine-tuning *both* the final set
 # of CONV layers along with our set of FC layers
-H = train(model, config.UNFROZEN_NUM_EPOCHS)
+H = train_model(model, config.UNFROZEN_NUM_EPOCHS)
 
 print("[INFO] evaluating after fine-tuning network...")
-testGen.reset()
-predIdxs = model.predict(x=testGen,
-                         steps=(totalTest // config.BATCH_SIZE) + 1)
+test_gen.reset()
+predIdxs = model.predict(x=test_gen,
+                         steps=(total_test // config.BATCH_SIZE) + 1)
 predIdxs = np.argmax(predIdxs, axis=1)
-print(classification_report(testGen.classes, predIdxs,
-                            target_names=testGen.class_indices.keys()))
+print(classification_report(test_gen.classes, predIdxs,
+                            target_names=test_gen.class_indices.keys()))
 N = config.UNFROZEN_NUM_EPOCHS
 plot_training(H, 20, config.UNFROZEN_PLOT_PATH)
 
