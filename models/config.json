@@ -3,14 +3,14 @@
         {
             "config": {
                 "name":"ov_model",
-                "base_path":"/opt/ml/models/ov_model"
+                "base_path":"/opt/models/ov_model"
             }
         },
         {
             "config": {
                 "name":"quantized_model",
-                "base_path":"/opt/ml/models/quantized_model"
+                "base_path":"/opt/models/quantized_model"
             }
         }
-	]
+    ]
 }
