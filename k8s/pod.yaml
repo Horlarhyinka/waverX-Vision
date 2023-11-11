@@ -11,7 +11,7 @@ spec:
         - /bin/sh
         - '-c'
         - sleep 3600
-      image: quay.io/olagoldhackxx/waverx-vision
+      image: quay.io/olagoldhackxx/waverx-vision:v1
       name: temp-pod
       resources:
         limits:
