@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker login quay.io
-docker build -t quay.io/olagoldhackxx/climatewavers-backend:v1 .
-docker push quay.io/olagoldhackxx/climatewavers-backend:v1
+#oc apply -f k8s/persistent_volume_claim.yaml
+oc apply -f k8s/deployment.yaml
+oc apply -f k8s/service.yaml

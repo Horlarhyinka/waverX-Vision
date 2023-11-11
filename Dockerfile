@@ -5,3 +5,5 @@ WORKDIR /opt/models
 
 # Copy your model files to the container
 COPY models/ /opt/models/
+
+CMD ["echo", "Model saved in container"]

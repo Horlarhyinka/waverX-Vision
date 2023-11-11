@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: temp-pod
+  name: temp-pod
+spec:
+  containers:
+    - args:
+        - /bin/sh
+        - '-c'
+        - sleep 3600
+      image: quay.io/olagoldhackxx/waverx-vision
+      name: temp-pod
+      resources:
+        limits:
+          cpu: 500m
+          memory: 1Gi
+      volumeMounts:
+        - mountPath: /opt/models
+          name: waverx-vision
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+  volumes:
+    - name: waverx-vision
+      persistentVolumeClaim:
+        claimName: waverx-vision
+status: {}
