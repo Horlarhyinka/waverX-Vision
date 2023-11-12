@@ -1,21 +1,12 @@
+---
 apiVersion: v1
-
 kind: PersistentVolumeClaim
-
 metadata:
-
-  name: waverx-vision
-
+  name: waverx-vision-pvc
 spec:
-
-  resources:
-
-    requests:
-
-      storage: 5Gi
-
-  volumeMode: Filesystem
-
   accessModes:
-
     - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
