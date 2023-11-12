@@ -1,88 +1,69 @@
-# Climate Wavers - Django Server
+# Computer Vision Model for Climate wavers
 
+## Overview
 
-The Django Server component of the Climate Change and Disaster Response Platform is responsible for handling core functionalities, user management, and data processing tasks. Built on the Django web framework, this server provides a robust and secure backend for the application.
+This computer vision model is an integral part of our AI-driven disaster response application. The model has been fine-tuned using TensorFlow based on the ResNet architecture. To optimize performance and resource usage, the model has been converted to the OpenVINO Intermediate Representation (IR) format and quantized.
 
-## Table of Contents
+## Model Architecture
 
-- [Climate Wavers - Django Server](#climate-wavers---django-server)
-  - [Table of Contents](#table-of-contents)
-  - [Project Overview](#project-overview)
-  - [Features](#features)
-  - [Installation and Setup](#installation-and-setup)
-  - [API Endpoints](#api-endpoints)
-  - [Environment Variables](#environment-variables)
-  - [License](#license)
+- **Base Architecture:** ResNet
+- **Framework:** TensorFlow
+- **Optimization:** Converted to OpenVINO IR and quantized for efficient deployment.
 
+## Model Training
 
-## Project Overview
+The model has undergone a comprehensive training process using a dataset relevant to disaster scenarios. Fine-tuning was performed on top of the pre-trained ResNet model, leveraging transfer learning to adapt the model to our specific use case.
 
-The Climate Change and Disaster Response Platform aims to monitor climate changes, predict natural disasters, and facilitate efficient disaster response. Leveraging Django, the server component ensures seamless user experience, data management, and integration with various data sources.
+## Model Conversion
 
-## Features
+To enable deployment on the OpenVINO model server, the TensorFlow model was converted to the OpenVINO Intermediate Representation (IR) format. This conversion facilitates efficient execution on a variety of hardware platforms supported by OpenVINO.
 
-- **User Authentication:** Secure user registration, login, and profile management.
-- **Data Management:** Store and manage user data, community information, and datasets.
-- **Real-time Data Processing:** Process incoming data streams for analysis and visualization.
-- **Collaborative Communities:** Enable users to form communities, share observations, and collaborate.
-- **API Endpoints:** Provides RESTful APIs for frontend interaction and external integrations.
+## Quantization
 
-## Installation and Setup
+Quantization was applied to reduce the precision of the model's weights, leading to a more lightweight model. This optimization is crucial for deploying the model on edge devices and in scenarios with resource constraints.
 
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/IsmaelKiprop/ClimateWavers.git
-   cd ClimateWavers
+## Deployment
+
+The model is deployed using the OpenVINO model server, which provides an efficient and scalable solution for serving computer vision models. The server is capable of handling inference requests, making it suitable for real-time disaster response applications.
+We provide three different methods for deploying this microservice to openshift clusters.
+
+### Import Git Repositoy (Recommended)
+Use the import git repository feature on openshift console.
+- Navigate to Add page in the Developer console on openshift
+- Select Dockerfile strategy
+- Deployment type should be Deployment Config
+- Secure routes
+- Supply the environment variables after deployment
+  
+### Automated Command line Deployment
+Using the scripts provided in `automate_development` folder, simplifies deployment. To use the scripts, docker and oc must be installed.
+
+#### Build and push image
+You can replace the image repository in the scripts `build.sh` in `automate_deployment` or use the repository we provided.
+  ```bash
+   automate_deployment/./build.sh
+   ```
+#### Deploy 
+If the image repository was changed when building, update the `development.yaml` file in `k8s` folder with your image repository
+  ```bash
+   automate_deployment/./deploy.sh
    ```
 
-2. **Install Dependencies:**
+### Tekton pipeline deployment script
+Deploy with tekton with the pipeline deployment script in `automated_deployment` directory. Setup environment variabes after deployment
    ```bash
-   pip install -r requirements.txt
+   automate_deployment/./tekton_pipeline.sh
    ```
 
-3. **Database Setup:**
-   - Configure the database settings in `settings.py`.
-   - Run migrations:
-     ```bash
-     python manage.py migrate
-     ```
+## Dependencies
 
-4. **Static and Media Files:**
-   - Collect static files:
-     ```bash
-     python manage.py collectstatic
-     ```
-   - Configure media file settings in `settings.py`.
+- TensorFlow
+- OpenVINO Toolkit
+- OpenVINO Python API
 
-5. **Run the Django Development Server:**
-   ```bash
-   python manage.py runserver
-   ```
-
-   The Django server will be available at `http://localhost:8000`.
-
-## API Endpoints
-
-- **User Management:**
-  - `/api/users/register/`: POST endpoint for user registration.
-  - `/api/users/login/`: POST endpoint for user login.
-  - `/api/users/profile/`: GET endpoint to retrieve user profile information.
-
-- **Community Management:**
-  - `/api/communities/`: GET and POST endpoint for community management.
-  - `/api/communities/<community_id>/`: GET, PUT, and DELETE endpoint for individual communities.
-
-- **Data Processing:**
-  - Define additional endpoints for real-time data processing based on project requirements.
-
-## Environment Variables
-
-- **SECRET_KEY:** Django secret key for security (store in a secure environment).
-- **DEBUG:** Set to `True` for development, `False` for production.
-- **DATABASE_URL:** Database connection URL for MYSQL databases.
-- **ALLOWED_HOSTS:** List of allowed hostnames for the Django server.
-
+Refer to the documentation of TensorFlow and OpenVINO for installation instructions and additional details.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This computer vision model is provided under the [license](link/to/license) specified for your use. Please review the license before integrating or modifying the model in your application.
+
