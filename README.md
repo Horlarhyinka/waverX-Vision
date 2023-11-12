@@ -25,7 +25,7 @@ Quantization was applied to reduce the precision of the model's weights, leading
 ## Deployment
 
 The model is deployed using the OpenVINO model server, which provides an efficient and scalable solution for serving computer vision models. The server is capable of handling inference requests, making it suitable for real-time disaster response applications. 
-To deploy the model with model server we will be using the scripts provided in `automate_development` to deploy a pvc and a temp pod to store our models on the pvc. To use the scripts, docker and oc must be installed.
+To deploy the model with model server we will be using the scripts provided in `automate_development` to deploy a pvc and a temp pod to store our models on the pvc. To use the scripts, docker and oc must be installed. Ensure that the openvino toolkit operator is installed on openshift console
 
 ### Build and push image
 You can replace the image repository in the scripts `build.sh` in `automate_deployment` or use the repository we provided.
@@ -33,7 +33,7 @@ You can replace the image repository in the scripts `build.sh` in `automate_depl
    automate_deployment/./build.sh
    ```
 ### Deploy Pod, Persistent Volume Claim and Model Server
-If the image repository was changed when building, update the `development.yaml` file in `k8s` folder with your image repository. The scripts deploy a pvc and pod, and bound pod to pvc, copying the models to the pvc and delete the temp pod. Lastly,  it deploys model server mounting the pvc
+If the image repository was changed when building, update the `development.yaml` file in `k8s` folder with your image repository. The scripts deploy a pvc and pod, and bound pod to pvc, copying the models to the pvc and delete the temp pod. Lastly, it deploys model server mounting the pvc
   ```bash
    automate_deployment/./deploy.sh
    ```
